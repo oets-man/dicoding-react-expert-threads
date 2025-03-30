@@ -2,36 +2,32 @@ const api = (() => {
   const BASE_URL = 'https://forum-api.dicoding.dev/v1/';
 
   async function _fetchGuest(endPoint, options = {}) {
-    try {
-      const response = await fetch(BASE_URL + endPoint, {
-        ...options,
-        headers: {
-          ...options.headers,
-          headers: { 'Content-Type': 'application/json' },
-        },
-      });
+    const response = await fetch(BASE_URL + endPoint, {
+      ...options,
+      headers: {
+        ...options.headers,
+        headers: { 'Content-Type': 'application/json' },
+      },
+    });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const responseJson = await response.json();
-      const { status, data, message } = responseJson;
-
-      if (status !== 'success') {
-        throw new Error(message);
-      }
-
-      return data;
-    } catch (error) {
-      throw new Error(error.message);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const responseJson = await response.json();
+    const { status, data, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    return data;
   }
 
   async function _fetchAuth(endPoint, options = {}) {
     const token = getAccessToken();
     if (!token) {
-      alert('Anda belum login');
+      alert('Anda belum login!');
       throw new Error('No access token found');
     }
     return _fetchGuest(endPoint, {
@@ -64,6 +60,7 @@ const api = (() => {
       return user;
     } catch (error) {
       console.error('error register', error.message);
+      throw error;
     }
   }
 
@@ -79,6 +76,7 @@ const api = (() => {
       return token;
     } catch (error) {
       console.error('error login', error.message);
+      throw error;
     }
   }
 
@@ -91,6 +89,7 @@ const api = (() => {
       return users;
     } catch (error) {
       console.error('error get all users', error.message);
+      throw error;
     }
   }
 
@@ -103,6 +102,7 @@ const api = (() => {
       return user;
     } catch (error) {
       console.error('error get own profile', error.message);
+      throw error;
     }
   }
 
@@ -119,6 +119,7 @@ const api = (() => {
       return thread;
     } catch (error) {
       console.error('error create thread', error.message);
+      throw error;
     }
   }
 
@@ -130,18 +131,19 @@ const api = (() => {
       return threads;
     } catch (error) {
       console.error('error get all threads', error.message);
+      throw error;
     }
   }
 
   async function getThreadDetail(id) {
     try {
-      const response = await _fetchGuest(`threads/${id}`, {
+      const { detailThread } = await _fetchGuest(`threads/${id}`, {
         method: 'GET',
       });
-      const { detailThread } = await response.json();
       return detailThread;
     } catch (error) {
       console.error('error get thread detail', error.message);
+      throw error;
     }
   }
 
@@ -156,6 +158,7 @@ const api = (() => {
       return comment;
     } catch (error) {
       console.error('error create comment', error.message);
+      throw error;
     }
   }
 
@@ -168,6 +171,7 @@ const api = (() => {
       return vote;
     } catch (error) {
       console.error('error set up vote', error.message);
+      throw error;
     }
   }
 
@@ -180,6 +184,7 @@ const api = (() => {
       return vote;
     } catch (error) {
       console.error('error set down vote', error.message);
+      throw error;
     }
   }
 
@@ -192,6 +197,7 @@ const api = (() => {
       return vote;
     } catch (error) {
       console.error('error set neutral vote', error.message);
+      throw error;
     }
   }
 
@@ -203,6 +209,7 @@ const api = (() => {
       return leaderboards;
     } catch (error) {
       console.error('error get leaderboards', error.message);
+      throw error;
     }
   }
 
