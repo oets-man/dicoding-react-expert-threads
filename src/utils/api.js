@@ -31,7 +31,7 @@ const api = (() => {
   async function _fetchAuth(endPoint, options = {}) {
     const token = getAccessToken();
     if (!token) {
-      alert('You need to login first');
+      alert('Anda belum login');
       throw new Error('No access token found');
     }
     return _fetchGuest(endPoint, {
