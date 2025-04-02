@@ -6,19 +6,15 @@ const api = (() => {
       ...options,
       headers: {
         ...options.headers,
-        headers: { 'Content-Type': 'application/json' },
+        'Content-Type': 'application/json',
       },
     });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
 
     const responseJson = await response.json();
     const { status, data, message } = responseJson;
 
-    if (status !== 'success') {
-      throw new Error(message);
+    if (status !== 'success' || !response.ok) {
+      throw new Error(message || 'unexpected error occurred');
     }
 
     return data;
@@ -48,169 +44,109 @@ const api = (() => {
   }
 
   async function register({ email, name, password }) {
-    try {
-      const { user } = await _fetchGuest('register', {
-        method: 'POST',
-        body: JSON.stringify({
-          email,
-          name,
-          password,
-        }),
-      });
-      return user;
-    } catch (error) {
-      console.error('error register', error.message);
-      throw error;
-    }
+    const { user } = await _fetchGuest('register', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        name,
+        password,
+      }),
+    });
+    return user;
   }
 
   async function login({ email, password }) {
-    try {
-      const { token } = await _fetchGuest(`login`, {
-        method: 'POST',
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-      return token;
-    } catch (error) {
-      console.error('error login', error.message);
-      throw error;
-    }
+    const { token } = await _fetchGuest(`login`, {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+    return token;
   }
 
   async function getAllUsers() {
-    try {
-      const { users } = await _fetchGuest(`users`, {
-        method: 'GET',
-      });
+    const { users } = await _fetchGuest(`users`, {
+      method: 'GET',
+    });
 
-      return users;
-    } catch (error) {
-      console.error('error get all users', error.message);
-      throw error;
-    }
+    return users;
   }
 
   async function getOwnProfile() {
-    try {
-      const { user } = await _fetchAuth(`users/me`, {
-        method: 'GET',
-      });
+    const { user } = await _fetchAuth(`users/me`, {
+      method: 'GET',
+    });
 
-      return user;
-    } catch (error) {
-      console.error('error get own profile', error.message);
-      throw error;
-    }
+    return user;
   }
 
   async function createThread({ title, body, category = '' }) {
-    try {
-      const { thread } = await _fetchAuth(`threads`, {
-        method: 'POST',
-        body: JSON.stringify({
-          title,
-          body,
-          category,
-        }),
-      });
-      return thread;
-    } catch (error) {
-      console.error('error create thread', error.message);
-      throw error;
-    }
+    const { thread } = await _fetchAuth(`threads`, {
+      method: 'POST',
+      body: JSON.stringify({
+        title,
+        body,
+        category,
+      }),
+    });
+    return thread;
   }
 
   async function getAllThreads() {
-    try {
-      const { threads } = await _fetchGuest(`threads`, {
-        method: 'GET',
-      });
-      return threads;
-    } catch (error) {
-      console.error('error get all threads', error.message);
-      throw error;
-    }
+    const { threads } = await _fetchGuest(`threads`, {
+      method: 'GET',
+    });
+    return threads;
   }
 
   async function getThreadDetail(id) {
-    try {
-      const { detailThread } = await _fetchGuest(`threads/${id}`, {
-        method: 'GET',
-      });
-      return detailThread;
-    } catch (error) {
-      console.error('error get thread detail', error.message);
-      throw error;
-    }
+    const { detailThread } = await _fetchGuest(`threads/${id}`, {
+      method: 'GET',
+    });
+    return detailThread;
   }
 
   async function createComment({ threadId, content }) {
-    try {
-      const { comment } = await _fetchAuth(`threads/${threadId}/comments`, {
-        method: 'POST',
-        body: JSON.stringify({
-          content,
-        }),
-      });
-      return comment;
-    } catch (error) {
-      console.error('error create comment', error.message);
-      throw error;
-    }
+    const { comment } = await _fetchAuth(`threads/${threadId}/comments`, {
+      method: 'POST',
+      body: JSON.stringify({
+        content,
+      }),
+    });
+    return comment;
   }
 
   async function setUpVote(threadId) {
-    try {
-      const { vote } = await _fetchAuth(`threads/${threadId}/up-vote`, {
-        method: 'POST',
-      });
+    const { vote } = await _fetchAuth(`threads/${threadId}/up-vote`, {
+      method: 'POST',
+    });
 
-      return vote;
-    } catch (error) {
-      console.error('error set up vote', error.message);
-      throw error;
-    }
+    return vote;
   }
 
   async function setDownVote(threadId) {
-    try {
-      const { vote } = await _fetchAuth(`threads/${threadId}/down-vote`, {
-        method: 'POST',
-      });
+    const { vote } = await _fetchAuth(`threads/${threadId}/down-vote`, {
+      method: 'POST',
+    });
 
-      return vote;
-    } catch (error) {
-      console.error('error set down vote', error.message);
-      throw error;
-    }
+    return vote;
   }
 
   async function setNeutralVote(threadId) {
-    try {
-      const { vote } = await _fetchAuth(`threads/${threadId}/neutral-vote`, {
-        method: 'POST',
-      });
+    const { vote } = await _fetchAuth(`threads/${threadId}/neutral-vote`, {
+      method: 'POST',
+    });
 
-      return vote;
-    } catch (error) {
-      console.error('error set neutral vote', error.message);
-      throw error;
-    }
+    return vote;
   }
 
   async function getLeaderboards() {
-    try {
-      const leaderboards = await _fetchGuest(`leaderboards`, {
-        method: 'GET',
-      });
-      return leaderboards;
-    } catch (error) {
-      console.error('error get leaderboards', error.message);
-      throw error;
-    }
+    const leaderboards = await _fetchGuest(`leaderboards`, {
+      method: 'GET',
+    });
+    return leaderboards;
   }
 
   return {

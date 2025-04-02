@@ -13,18 +13,21 @@ function setAuthUserActionCreator(authUser) {
   };
 }
 
-function setAuthUser({ id, password }) {
+function setAuthUser({ email, password }) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      const token = await api.login({ id, password });
+      const token = await api.login({ email, password });
       api.putAccessToken(token);
       const authUser = await api.getOwnProfile();
-      dispatch(setAuthUserActionCreator(authUser));
+      await dispatch(setAuthUserActionCreator(authUser));
+      dispatch(hideLoading());
+      return true;
     } catch (error) {
       alert(error.message);
+      dispatch(hideLoading());
+      return false;
     }
-    dispatch(hideLoading());
   };
 }
 

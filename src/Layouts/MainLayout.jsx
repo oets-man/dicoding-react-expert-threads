@@ -1,8 +1,22 @@
 import { Link, Navigate, Outlet } from 'react-router-dom';
+import Loading from '../components/Loading';
+import { ButtonNormal } from '../components/Buttons';
+import { unsetAuthUser } from '../states/authUser/action';
+import { useDispatch } from 'react-redux';
 
 export default function MainLayout() {
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    const isConfirmed = confirm('Yakin ingin logout?');
+    if (!isConfirmed) return;
+    dispatch(unsetAuthUser());
+  };
+
   return (
     <>
+      <Loading />
+
       <header className="bg-slate-300 text-slate-800 dark:bg-slate-800 dark:text-slate-200">
         <div className="flex items-center justify-between">
           <Link to={'/'} className="p-4 ">
@@ -31,9 +45,10 @@ export default function MainLayout() {
 						<ButtonNormal onClick={() => navigate('/add')} iconName='material-symbols:note-add'>
 							{label.addNote}
 						</ButtonNormal>
-						<ButtonNormal onClick={logout} iconName='material-symbols:logout'>
-							{label.logout}
-						</ButtonNormal> */}
+            */}
+            <ButtonNormal onClick={logout} iconName="material-symbols:logout">
+              Keluar
+            </ButtonNormal>
           </div>
         </div>
 

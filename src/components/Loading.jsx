@@ -1,9 +1,11 @@
+import LoadingBarContainer from 'react-redux-loading-bar';
+import { LoadingBar } from 'react-redux-loading-bar';
+
 const Loading = () => {
   return (
-    <div className="loading-container">
-      <div className="loading-spinner"></div>
-      <p>Loading...</p>
-    </div>
+    <LoadingBarContainer>
+      <LoadingBar />
+    </LoadingBarContainer>
   );
 };
 export default Loading;

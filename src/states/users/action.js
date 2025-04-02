@@ -16,10 +16,13 @@ function registerUser({ email, name, password }) {
     dispatch(registerUsersActionCreator());
     try {
       await api.register({ email, name, password });
+      dispatch(hideLoading());
+      return true;
     } catch (error) {
       alert(error.message);
+      dispatch(hideLoading());
+      return false;
     }
-    dispatch(hideLoading());
   };
 }
 
