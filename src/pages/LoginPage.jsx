@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import InputField from '../components/InputField';
 import useInput from '../hooks/use-input';
-import { ButtonNormal } from '../components/Buttons';
+import { ButtonNormal } from '../components/Button';
 import { useDispatch } from 'react-redux';
 import { setAuthUser } from '../states/authUser/action';
 import { useLoading } from '../hooks/use-loading';

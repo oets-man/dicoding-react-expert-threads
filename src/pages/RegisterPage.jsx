@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import InputField from '../components/InputField';
 import useInput from '../hooks/use-input';
-import { ButtonNormal } from '../components/Buttons';
+import { ButtonNormal } from '../components/Button';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../states/users/action';

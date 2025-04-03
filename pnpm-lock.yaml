@@ -14,6 +14,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.17
         version: 4.0.17(vite@6.2.3(jiti@2.4.2)(lightningcss@1.29.2))
+      eslint-config-dicodingacademy:
+        specifier: ^0.9.4
+        version: 0.9.4(eslint@9.23.0(jiti@2.4.2))
       prop-types:
         specifier: ^15.8.1
         version: 15.8.1
@@ -831,6 +834,11 @@ packages:
   escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
+
+  eslint-config-dicodingacademy@0.9.4:
+    resolution: {integrity: sha512-ADvEacNgQ3ImBNu4IJwon1/2L+sP5fjvMgi2c6HMMY/c9F63HsEdNKREHJudVeTicW8uUdeUXX8DgZ+Xknrphw==}
+    peerDependencies:
+      eslint: '>= 8'
 
   eslint-config-prettier@10.1.1:
     resolution: {integrity: sha512-4EQQr6wXwS+ZJSzaR5ZCrYgLxqvUjdXctaEtBqHcbkW944B1NQyO4qpdHQbXBONfwxXdkAY81HH4+LUfrg+zPw==}
@@ -2434,6 +2442,10 @@ snapshots:
   escalade@3.2.0: {}
 
   escape-string-regexp@4.0.0: {}
+
+  eslint-config-dicodingacademy@0.9.4(eslint@9.23.0(jiti@2.4.2)):
+    dependencies:
+      eslint: 9.23.0(jiti@2.4.2)
 
   eslint-config-prettier@10.1.1(eslint@9.23.0(jiti@2.4.2)):
     dependencies:

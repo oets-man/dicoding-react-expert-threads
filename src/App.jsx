@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import Navigation from './components/Navigation';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -10,9 +9,9 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { preloadProcess } from './states/isPreload/action';
 import Loading from './components/Loading';
+import ErrorPage from './pages/ErrorPage';
 
 const App = () => {
-  const authUser = useSelector((states) => states.authUser || null);
   const isPreload = useSelector((states) => states.isPreload || false);
   const dispatch = useDispatch();
 
@@ -31,25 +30,17 @@ const App = () => {
     );
   }
 
-  if (authUser === null) {
-    return (
-      <>
-        <Routes>
-          <Route element={<AuthLayout />}>
-            <Route path="/*" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-          </Route>
-        </Routes>
-      </>
-    );
-  }
-
   return (
     <>
       <Routes>
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
         </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );
