@@ -7,7 +7,7 @@ const Navigation = ({ auth, onLogout }) => {
     <nav className="">
       <ul className="flex items-center">
         <li>
-          <Button.Normal as={Link} to="/" iconName="entypo:chat">
+          <Button.Normal as={Link} to="/threads" iconName="entypo:chat">
             Threads
           </Button.Normal>
         </li>

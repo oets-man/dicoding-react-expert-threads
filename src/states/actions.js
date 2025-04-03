@@ -10,5 +10,17 @@ const actions = {
     GET_USERS: 'GET_USERS',
     REGISTER_USERS: 'REGISTER_USERS',
   },
+  threads: {
+    GET_THREADS: 'GET_THREADS',
+    ADD_THREAD: 'ADD_THREAD',
+  },
+  threadDetail: {
+    GET_THREAD_DETAIL: 'GET_THREAD_DETAIL',
+    CLEAR_THREAD_DETAIL: 'CLEAR_THREAD_DETAIL',
+  },
+  categories: {
+    SET_CATEGORIES: 'SET_CATEGORIES',
+    TOGGLE_CATEGORY_SELECTION: 'TOGGLE_CATEGORY_SELECTION',
+  },
 };
 export default actions;

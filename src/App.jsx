@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import ThreadsPage from './pages/ThreadsPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import MainLayout from './Layouts/MainLayout';
@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { preloadProcess } from './states/isPreload/action';
 import Loading from './components/Loading';
 import ErrorPage from './pages/ErrorPage';
+import ThreadDetailPage from './pages/ThreadDetailPage';
 
 const App = () => {
   const isPreload = useSelector((states) => states.isPreload || false);
@@ -38,7 +39,9 @@ const App = () => {
           <Route path="/register" element={<RegisterPage />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<ThreadsPage />} />
+          <Route path="/threads" element={<ThreadsPage />} />
+          <Route path="/threads/:id" element={<ThreadDetailPage />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
