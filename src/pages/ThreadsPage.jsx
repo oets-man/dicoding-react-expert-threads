@@ -34,7 +34,7 @@ const ThreadsPage = () => {
     <>
       <div className="flex items-center justify-start gap-2">
         <p className="text-lg">Categories:</p>
-        <ul className="flex">
+        <ul className="flex gap-x-2">
           {categories.map((category) => (
             <li key={category.category}>
               <Button.Normal onClick={() => toggleSelect(category.category)} className="text-3xl">

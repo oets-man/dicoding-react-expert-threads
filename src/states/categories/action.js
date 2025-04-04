@@ -14,13 +14,13 @@ const toggleCategorySelection = (category) => ({
 
 const extractCategoriesFromThreads = () => (dispatch, getState) => {
   const threads = getState().threads;
-  const categoriesSet = new Set();
 
+  const categoriesMap = {};
   threads.forEach((thread) => {
-    categoriesSet.add(thread.category);
+    categoriesMap[thread.category] = true;
   });
 
-  const categoriesArray = Array.from(categoriesSet).map((category) => ({
+  const categoriesArray = Object.keys(categoriesMap).map((category) => ({
     category,
     selected: true,
   }));

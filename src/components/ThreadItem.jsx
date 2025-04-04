@@ -3,7 +3,12 @@ import parse from 'html-react-parser';
 import { postedAt } from '../utils';
 import { Link } from 'react-router-dom';
 import ThreadResponse from './ThreadResponse';
+import { useSelector } from 'react-redux';
+
 function ThreadItem({ category, id, title, body, createdAt, ownerId, upVotesBy, downVotesBy, totalComments }) {
+  const users = useSelector((states) => states.users || null);
+  const user = users?.find((user) => user.id === ownerId) || null;
+
   return (
     <div className="border border-gray-300 py-2 px-2 my-2 rounded">
       <p className="text-blue-600 py-1 px-2 border rounded border-blue-600 inline-block">#{category}</p>
@@ -13,19 +18,11 @@ function ThreadItem({ category, id, title, body, createdAt, ownerId, upVotesBy, 
       {parse(body)}
       <hr className="mt-4 border-blue-500" />
       <div className="flex items-center justify-between">
-        <p>Posted: {postedAt(createdAt)}</p>
-        <p>By: {ownerId}</p>
-      </div>
-      <div className="flex items-center gap-x-4">
-        <ThreadResponse
-          iconName="iconamoon:like-thin"
-          count={upVotesBy.length}
-          onClick={() => {
-            console.log('upvote');
-          }}
-        />
-        <ThreadResponse iconName="iconamoon:dislike-thin" count={downVotesBy.length} />
-        <ThreadResponse as="div" iconName="typcn:arrow-back-outline" count={totalComments} />
+        <div>
+          <p>Posted: {postedAt(createdAt)}</p>
+          <p>By: {user?.name || ownerId}</p>
+        </div>
+        <ThreadResponse upVotesBy={upVotesBy} downVotesBy={downVotesBy} totalComments={totalComments} threadId={id} />
       </div>
     </div>
   );

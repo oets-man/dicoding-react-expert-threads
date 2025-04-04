@@ -76,11 +76,11 @@ function RegisterPage() {
           id="confirm-password"
           required
         />
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center px-2">
           <ButtonNormal type="submit" disabled={isLoading}>
             {isLoading ? 'Memproses...' : 'Daftar'}
           </ButtonNormal>
-          <p className="p-2 text-sm text-slate-950 dark:text-slate-200">
+          <p className="text-sm text-slate-950 dark:text-slate-200">
             Sudah punya akun?{' '}
             <Link to={'/login'} className="underline">
               Masuk

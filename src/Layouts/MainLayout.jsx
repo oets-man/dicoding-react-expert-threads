@@ -20,7 +20,7 @@ export default function MainLayout() {
 
       <header className="bg-slate-300 text-slate-800 dark:bg-slate-800 dark:text-slate-200">
         <div className="flex items-center justify-between">
-          <Link to={'/'} className="p-4 ">
+          <Link to={'/'} className="px-4 py-2 ">
             <h1 className="text-xl font-medium ">Forum Diskusi</h1>
             <p className="italic text-sm">
               {authUser ? (
@@ -35,7 +35,7 @@ export default function MainLayout() {
               )}
             </p>
           </Link>
-          <div className="flex items-center">
+          <div className="px-4 py-2">
             <Navigation onLogout={logout} auth={authUser} />
           </div>
         </div>

@@ -5,7 +5,7 @@ import Button from './Button';
 const Navigation = ({ auth, onLogout }) => {
   return (
     <nav className="">
-      <ul className="flex items-center">
+      <ul className="flex items-center gap-x-2">
         <li>
           <Button.Normal as={Link} to="/threads" iconName="entypo:chat">
             Threads
@@ -14,6 +14,11 @@ const Navigation = ({ auth, onLogout }) => {
         <li>
           <Button.Normal as={Link} to="/leaderboards" iconName="material-symbols-light:leaderboard">
             Leaderboards
+          </Button.Normal>
+        </li>
+        <li>
+          <Button.Normal onClick={() => window.history.back()} iconName="material-symbols-light:arrow-back">
+            Kembali
           </Button.Normal>
         </li>
         <li>

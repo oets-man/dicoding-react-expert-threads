@@ -12,7 +12,11 @@ export default [
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node, // Tambahkan globals node jika perlu
+        React: 'readonly', // Definisikan React secara eksplisit
+      },
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
@@ -28,8 +32,23 @@ export default [
       ...daStyle.rules,
       ...js.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': [
+        'error',
+        {
+          varsIgnorePattern: '^[A-Z_]',
+          ignoreRestSiblings: true, // Ini membantu dengan destructuring
+          argsIgnorePattern: '^_', // Mengabaikan args yang dimulai dengan underscore
+          destructuredArrayIgnorePattern: '^_', // Mengabaikan destructured array yang dimulai dengan underscore
+        },
+      ],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react/jsx-uses-vars': 'error', // Penting: tambahkan ini untuk mengenali variabel yang digunakan dalam JSX
+      // 'react/jsx-uses-react': 'error', // Tambahkan jika menggunakan React < 17
+    },
+    settings: {
+      react: {
+        version: 'detect', // Otomatis mendeteksi versi React
+      },
     },
   },
   eslintConfigPrettier,

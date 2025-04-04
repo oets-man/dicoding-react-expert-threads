@@ -45,11 +45,11 @@ function LoginPage() {
           id="password"
           required
         />
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between px-2">
           <ButtonNormal type="submit" disabled={isLoading}>
             {isLoading ? 'Memproses...' : 'Masuk'}
           </ButtonNormal>
-          <p className="p-2 text-sm text-slate-900 dark:text-slate-200">
+          <p className="text-sm text-slate-900 dark:text-slate-200">
             Belum punya akun?{' '}
             <Link to={'/register'} className="underline">
               Daftar

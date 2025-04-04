@@ -13,6 +13,10 @@ const actions = {
   threads: {
     GET_THREADS: 'GET_THREADS',
     ADD_THREAD: 'ADD_THREAD',
+    UP_VOTE: 'UP_VOTE',
+    DOWN_VOTE: 'DOWN_VOTE',
+    NEUTRAL_VOTE: 'NEUTRAL_VOTE',
+    RESTORE_THREAD_VOTES: 'RESTORE_THREAD_VOTES',
   },
   threadDetail: {
     GET_THREAD_DETAIL: 'GET_THREAD_DETAIL',
