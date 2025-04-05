@@ -1,17 +1,6 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
-import actions from '../actions';
-
-const { authUser: ActionType } = actions;
-
-function setAuthUserActionCreator(authUser) {
-  return {
-    type: ActionType.SET_AUTH_USER,
-    payload: {
-      authUser,
-    },
-  };
-}
+import { setAuthUserCreator, unsetAuthUserCreator } from './creator';
 
 function setAuthUser({ email, password }) {
   return async (dispatch) => {
@@ -20,7 +9,7 @@ function setAuthUser({ email, password }) {
       const token = await api.login({ email, password });
       api.putAccessToken(token);
       const authUser = await api.getOwnProfile();
-      await dispatch(setAuthUserActionCreator(authUser));
+      await dispatch(setAuthUserCreator(authUser));
       dispatch(hideLoading());
       return true;
     } catch (error) {
@@ -31,17 +20,11 @@ function setAuthUser({ email, password }) {
   };
 }
 
-function unsetAuthUserActionCreator() {
-  return {
-    type: ActionType.UNSET_AUTH_USER,
-  };
-}
-
 function unsetAuthUser() {
   return (dispatch) => {
-    dispatch(unsetAuthUserActionCreator());
+    dispatch(unsetAuthUserCreator());
     api.putAccessToken('');
   };
 }
 
-export { setAuthUser, unsetAuthUser, setAuthUserActionCreator };
+export { setAuthUser, unsetAuthUser };

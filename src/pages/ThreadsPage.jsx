@@ -45,11 +45,13 @@ const ThreadsPage = () => {
         </ul>
       </div>
       <h1 className="text-2xl">List Threads</h1>
-      {filteredThreads.length > 0 ? (
-        filteredThreads.map((thread) => <ThreadItem key={thread.id} {...thread} />)
-      ) : (
-        <p className="text-lg">No threads available</p>
-      )}
+      <div className="pt-2 pb-4">
+        {filteredThreads.length > 0 ? (
+          filteredThreads.map((thread) => <ThreadItem key={thread.id} id={thread.id} />)
+        ) : (
+          <p className="text-lg">No threads available</p>
+        )}
+      </div>
     </>
   );
 };

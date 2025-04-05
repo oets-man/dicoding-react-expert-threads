@@ -26,8 +26,8 @@ function RegisterPage() {
     }
     dispatch(registerUser({ email, name, password })).then((result) => {
       if (result) {
-        alert('Registrasi sukses. Sekarang Anda bisa login');
         navigate('/login', { replace: true });
+        alert('Registrasi sukses. Sekarang Anda bisa login');
       }
     });
   };

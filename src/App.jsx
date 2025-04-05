@@ -12,6 +12,7 @@ import Loading from './components/Loading';
 import ErrorPage from './pages/ErrorPage';
 import ThreadDetailPage from './pages/ThreadDetailPage';
 import { getUsers } from './states/users/action';
+import LoadingTailwind from './components/LoadingTailwind';
 
 const App = () => {
   const isPreload = useSelector((states) => states.isPreload || false);
@@ -23,14 +24,7 @@ const App = () => {
   }, [dispatch]);
 
   if (isPreload) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="w-full border rounded-md bg-slate-100 min-w-96 border-slate-300 dark:bg-slate-800">
-          <Loading />
-          <p className="text-center p-8 text-slate-800 dark:text-slate-200 text-3xl">Tunggu sebentar ...</p>
-        </div>
-      </div>
-    );
+    return <LoadingTailwind>Tunggu sebentar. Aplikasi sedang disiapkan …</LoadingTailwind>;
   }
 
   return (

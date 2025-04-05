@@ -17,6 +17,11 @@ const store = configureStore({
     threadDetail: threadDetailReducer,
     categories: categoryReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }),
 });
 
 export default store;

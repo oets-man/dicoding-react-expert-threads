@@ -1,34 +1,27 @@
 import { hideLoading } from 'react-redux-loading-bar';
-import actions from '../actions';
 import { showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
-
-const { threadDetail: ActionType } = actions;
-
-function getThreadDetailActionCreator(threadDetail) {
-  return {
-    type: ActionType.GET_THREAD_DETAIL,
-    payload: { threadDetail },
-  };
-}
-function clearThreadDetailActionCreator() {
-  return {
-    type: ActionType.CLEAR_THREAD_DETAIL,
-  };
-}
+import { clearThreadDetailCreator, getThreadDetailCreator } from './creator';
 
 function getThreadDetail(threadId) {
   return async (dispatch) => {
     dispatch(showLoading());
-    dispatch(clearThreadDetailActionCreator());
+    dispatch(clearThreadDetailCreator());
 
     try {
       const thread = await api.getThreadDetail(threadId);
-      dispatch(getThreadDetailActionCreator(thread));
+      dispatch(getThreadDetailCreator(thread));
     } catch (error) {
       alert(error.message);
     }
     dispatch(hideLoading());
   };
 }
-export { getThreadDetail };
+
+function clearThreadDetail() {
+  return (dispatch) => {
+    dispatch(clearThreadDetailCreator());
+  };
+}
+
+export { getThreadDetail, clearThreadDetail };
