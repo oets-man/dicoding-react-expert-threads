@@ -37,5 +37,8 @@ const actions = {
     SET_CATEGORIES: 'SET_CATEGORIES',
     TOGGLE_CATEGORY_SELECTION: 'TOGGLE_CATEGORY_SELECTION',
   },
+  leaderboards: {
+    GET_LEADERBOARDS: 'GET_LEADERBOARDS',
+  },
 };
 export default actions;

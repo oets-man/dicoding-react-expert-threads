@@ -6,6 +6,7 @@ import { loadingBarReducer } from 'react-redux-loading-bar';
 import threadsReducer from './threads/reducer';
 import threadDetailReducer from './threadDetail/reducer';
 import categoryReducer from './categories/reducer';
+import leaderboardsReducer from './leaderboards/reducer';
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     threads: threadsReducer,
     threadDetail: threadDetailReducer,
     categories: categoryReducer,
+    leaderboards: leaderboardsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
