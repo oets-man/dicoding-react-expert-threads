@@ -13,6 +13,7 @@ import ErrorPage from './pages/ErrorPage';
 import ThreadDetailPage from './pages/ThreadDetailPage';
 import { getUsers } from './states/users/action';
 import LoadingTailwind from './components/LoadingTailwind';
+import ThreadNewPage from './pages/ThreadNewPage';
 
 const App = () => {
   const isPreload = useSelector((states) => states.isPreload || false);
@@ -37,6 +38,7 @@ const App = () => {
         <Route element={<MainLayout />}>
           <Route path="/" element={<ThreadsPage />} />
           <Route path="/threads" element={<ThreadsPage />} />
+          <Route path="/threads/new" element={<ThreadNewPage />} />
           <Route path="/threads/:id" element={<ThreadDetailPage />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />

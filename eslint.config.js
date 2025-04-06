@@ -3,13 +3,14 @@ import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import react from 'eslint-plugin-react';
-import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import daStyle from 'eslint-config-dicodingacademy';
 
 export default [
   { ignores: ['dist'] },
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['src/**/*.{js,jsx,ts,tsx}'],
+
     languageOptions: {
       ecmaVersion: 2020,
       globals: {
@@ -24,7 +25,7 @@ export default [
       },
     },
     plugins: {
-      react: react,
+      react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },

@@ -36,7 +36,7 @@ export default function MainLayout() {
             </p>
           </Link>
           <div className="px-4 py-2">
-            <Navigation onLogout={logout} auth={authUser} />
+            <Navigation onLogout={logout} auth={!!authUser} />
           </div>
         </div>
         <hr />

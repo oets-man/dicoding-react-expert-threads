@@ -5,6 +5,7 @@ import { getThreads } from '../states/threads/action';
 import Button from '../components/Button';
 import { extractCategoriesFromThreads, toggleCategorySelection } from '../states/categories/action';
 import ThreadItem from '../components/ThreadItem';
+import { Link } from 'react-router-dom';
 
 const ThreadsPage = () => {
   const threads = useSelector((states) => states.threads);
@@ -32,17 +33,22 @@ const ThreadsPage = () => {
 
   return (
     <>
-      <div className="flex items-center justify-start gap-2">
-        <p className="text-lg">Categories:</p>
-        <ul className="flex gap-x-2">
-          {categories.map((category) => (
-            <li key={category.category}>
-              <Button.Normal onClick={() => toggleSelect(category.category)} className="text-3xl">
-                {category.category} {category.selected ? '✔️' : '❌'}
-              </Button.Normal>
-            </li>
-          ))}
-        </ul>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center justify-start gap-2">
+          <p className="text-lg">Categories:</p>
+          <ul className="flex gap-x-2">
+            {categories.map((category) => (
+              <li key={category.category}>
+                <Button.Normal onClick={() => toggleSelect(category.category)} className="text-3xl">
+                  {category.category} {category.selected ? '✔️' : '❌'}
+                </Button.Normal>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Button.Normal as={Link} to="/threads/new" iconName="material-symbols-light:add">
+          Add New
+        </Button.Normal>
       </div>
       <h1 className="text-2xl">List Threads</h1>
       <div className="pt-2 pb-4">
