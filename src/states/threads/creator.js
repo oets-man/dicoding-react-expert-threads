@@ -18,7 +18,7 @@ export function addThreadCreator(thread) {
 
 export function restoreVoteCreator({ threadId, upVotesBy, downVotesBy }) {
   return {
-    type: ActionType.RESTORE_THREAD_VOTES,
+    type: ActionType.RESTORE_VOTE,
     payload: { threadId, upVotesBy, downVotesBy },
   };
 }

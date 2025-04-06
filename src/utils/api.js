@@ -142,6 +142,30 @@ const api = (() => {
     return vote;
   }
 
+  async function setUpVoteComment(threadId, commentId) {
+    const { vote } = await _fetchAuth(`threads/${threadId}/comments/${commentId}/up-vote`, {
+      method: 'POST',
+    });
+
+    return vote;
+  }
+
+  async function setDownVoteComment(threadId, commentId) {
+    const { vote } = await _fetchAuth(`threads/${threadId}/comments/${commentId}/down-vote`, {
+      method: 'POST',
+    });
+
+    return vote;
+  }
+
+  async function setNeutralVoteComment(threadId, commentId) {
+    const { vote } = await _fetchAuth(`threads/${threadId}/comments/${commentId}/neutral-vote`, {
+      method: 'POST',
+    });
+
+    return vote;
+  }
+
   async function getLeaderboards() {
     const leaderboards = await _fetchGuest(`leaderboards`, {
       method: 'GET',
@@ -164,6 +188,9 @@ const api = (() => {
     setDownVote,
     setNeutralVote,
     getLeaderboards,
+    setUpVoteComment,
+    setDownVoteComment,
+    setNeutralVoteComment,
   };
 })();
 

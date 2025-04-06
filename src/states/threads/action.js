@@ -48,7 +48,7 @@ function cloneThreadVotes(threadId) {
   };
 }
 
-const setUpVote = (threadId) => async (dispatch, getState) => {
+const performVote = (threadId, actionType) => async (dispatch, getState) => {
   const authUser = getState().authUser;
   const [upVotesBy, downVotesBy] = cloneThreadVotes(threadId)(getState);
 
@@ -56,44 +56,31 @@ const setUpVote = (threadId) => async (dispatch, getState) => {
     if (!authUser || !authUser.id) {
       throw new Error('Anda perlu login!');
     }
-    dispatch(upVoteCreator(threadId, authUser.id));
-    await api.setUpVote(threadId);
-  } catch (error) {
-    dispatch(restoreVoteCreator({ threadId, upVotesBy, downVotesBy }));
-    alert(error.message);
-  }
-};
 
-const setDownVote = (threadId) => async (dispatch, getState) => {
-  const authUser = getState().authUser;
-  const [upVotesBy, downVotesBy] = cloneThreadVotes(threadId)(getState);
-
-  try {
-    if (!authUser || !authUser.id) {
-      throw new Error('Anda perlu login!');
+    switch (actionType) {
+      case 'upvote':
+        dispatch(upVoteCreator(threadId, authUser.id));
+        await api.setUpVote(threadId);
+        break;
+      case 'downvote':
+        dispatch(downVoteCreator(threadId, authUser.id));
+        await api.setDownVote(threadId);
+        break;
+      case 'neutral':
+        dispatch(neutralVoteCreator(threadId, authUser.id));
+        await api.setNeutralVote(threadId);
+        break;
+      default:
+        throw new Error('Tipe aksi tidak valid');
     }
-    dispatch(downVoteCreator(threadId, authUser.id));
-    await api.setDownVote(threadId);
   } catch (error) {
     dispatch(restoreVoteCreator({ threadId, upVotesBy, downVotesBy }));
     alert(error.message);
   }
 };
 
-const setNeutralVote = (threadId) => async (dispatch, getState) => {
-  const authUser = getState().authUser;
-  const [upVotesBy, downVotesBy] = cloneThreadVotes(threadId)(getState);
-
-  try {
-    if (!authUser || !authUser.id) {
-      throw new Error('Anda perlu login!');
-    }
-    dispatch(neutralVoteCreator(threadId, authUser.id));
-    await api.setNeutralVote(threadId);
-  } catch (error) {
-    dispatch(restoreVoteCreator({ threadId, upVotesBy, downVotesBy }));
-    alert(error.message);
-  }
-};
+const setUpVote = (threadId) => performVote(threadId, 'upvote');
+const setDownVote = (threadId) => performVote(threadId, 'downvote');
+const setNeutralVote = (threadId) => performVote(threadId, 'neutral');
 
 export { addThread, getThreads, setUpVote, setDownVote, setNeutralVote };

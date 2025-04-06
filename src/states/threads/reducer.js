@@ -41,7 +41,7 @@ function threadsReducer(threads = [], action = {}) {
         }
         return thread;
       });
-    case ActionType.RESTORE_THREAD_VOTES:
+    case ActionType.RESTORE_VOTE:
       return threads.map((thread) => {
         if (thread.id === action.payload.threadId) {
           return {

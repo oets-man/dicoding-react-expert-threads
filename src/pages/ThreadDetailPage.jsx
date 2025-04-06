@@ -1,11 +1,18 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { clearThreadDetail, getThreadDetail } from '../states/threadDetail/action';
+import {
+  clearThreadDetail,
+  getThreadDetail,
+  setDetailDownVote,
+  setDetailNeutralVote,
+  setDetailUpVote,
+} from '../states/threadDetail/action';
 import { useParams } from 'react-router-dom';
 import LoadingTailwind from '../components/LoadingTailwind';
 import parse from 'html-react-parser';
 import ThreadFooter from '../components/ThreadFooter';
+import CommentItem from '../components/CommentItem';
 
 const ThreadDetailPage = () => {
   const loadingBar = useSelector((states) => states.loadingBar);
@@ -22,6 +29,10 @@ const ThreadDetailPage = () => {
     };
   }, [dispatch, id]);
 
+  const onUpVote = () => dispatch(setDetailUpVote(id));
+  const onDownVote = () => dispatch(setDetailDownVote(id));
+  const onNeutralVote = () => dispatch(setDetailNeutralVote(id));
+
   if (isLoading) {
     return <LoadingTailwind />;
   }
@@ -37,15 +48,20 @@ const ThreadDetailPage = () => {
         <h2 className="text-2xl">{threadDetail.title}</h2>
         <div>{parse(threadDetail.body)}</div>
         <hr className="my-2" />
-        <ThreadFooter
-          id={threadDetail.id}
-          owner={threadDetail.owner.name}
-          avatar={threadDetail.owner.avatar}
-          totalComments={threadDetail.comments.length}
-        />
+        <ThreadFooter {...threadDetail} onUpVote={onUpVote} onDownVote={onDownVote} onNeutralVote={onNeutralVote} />
         <hr className="my-2" />
       </div>
-      <pre>{JSON.stringify(threadDetail, null, 2)}</pre>
+      <div className="container mx-auto">
+        <h3 className="text-xl">Comments</h3>
+        {threadDetail.comments?.length > 0 ? (
+          threadDetail.comments.map((comment) => <CommentItem key={comment.id} {...comment} />)
+        ) : (
+          <p className="text-lg text-center">No comments available</p>
+        )}
+      </div>
+
+      {/* <pre>{JSON.stringify(threadDetail, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(threadDetail.comments, null, 2)}</pre> */}
     </>
   ) : (
     <p className="text-lg text-center">No threads available</p>

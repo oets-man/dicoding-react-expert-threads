@@ -43,7 +43,7 @@ export default [
       ],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'react/jsx-uses-vars': 'error', // Penting: tambahkan ini untuk mengenali variabel yang digunakan dalam JSX
-      // 'react/jsx-uses-react': 'error', // Tambahkan jika menggunakan React < 17
+      'react/prop-types': 'error',
     },
     settings: {
       react: {
