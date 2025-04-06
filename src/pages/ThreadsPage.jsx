@@ -6,11 +6,15 @@ import Button from '../components/Button';
 import { extractCategoriesFromThreads, toggleCategorySelection } from '../states/categories/action';
 import ThreadItem from '../components/ThreadItem';
 import { Link } from 'react-router-dom';
+import NotFound from '../components/NotFound';
+import { useLoading } from '../hooks/use-loading';
+import LoadingTailwind from '../components/LoadingTailwind';
 
 const ThreadsPage = () => {
   const threads = useSelector((states) => states.threads);
   const categories = useSelector((states) => states.categories);
   const dispatch = useDispatch();
+  const isLoading = useLoading();
 
   useEffect(() => {
     dispatch(getThreads());
@@ -31,6 +35,10 @@ const ThreadsPage = () => {
     return category && category.selected;
   });
 
+  if (isLoading) {
+    return <LoadingTailwind />;
+  }
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -46,16 +54,16 @@ const ThreadsPage = () => {
             ))}
           </ul>
         </div>
-        <Button.Normal as={Link} to="/threads/new" iconName="material-symbols-light:add">
+        <Button.Dark as={Link} to="/threads/new" iconName="material-symbols-light:add">
           Add New
-        </Button.Normal>
+        </Button.Dark>
       </div>
       <h1 className="text-2xl">List Threads</h1>
       <div className="pt-2 pb-4">
         {filteredThreads.length > 0 ? (
           filteredThreads.map((thread) => <ThreadItem key={thread.id} id={thread.id} />)
         ) : (
-          <p className="text-lg">No threads available</p>
+          <NotFound>No threads available</NotFound>
         )}
       </div>
     </>

@@ -24,15 +24,24 @@ function getThreads() {
 }
 
 function addThread({ title, body, category = '' }) {
-  return async (dispatch) => {
-    dispatch(showLoading());
+  return async (dispatch, getState) => {
+    const authUser = getState().authUser;
+
     try {
+      if (!authUser || !authUser.id) {
+        throw new Error('Anda perlu login!');
+      }
+
+      dispatch(showLoading());
       const thread = await api.createThread({ title, body, category });
       dispatch(addThreadCreator(thread));
+      dispatch(hideLoading());
+      return thread;
     } catch (error) {
+      dispatch(hideLoading());
       alert(error.message);
+      return false;
     }
-    dispatch(hideLoading());
   };
 }
 

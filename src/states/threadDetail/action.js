@@ -2,6 +2,7 @@ import { hideLoading } from 'react-redux-loading-bar';
 import { showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 import {
+  addCommentCreator,
   clearThreadDetailCreator,
   downVoteCommentCreator,
   downVoteDetailCreator,
@@ -135,6 +136,24 @@ const setCommentUpVote = (commentId) => performVoteComment(commentId, 'upvote');
 const setCommentDownVote = (commentId) => performVoteComment(commentId, 'downvote');
 const setCommentNeutralVote = (commentId) => performVoteComment(commentId, 'neutral');
 
+const addComment = (content) => async (dispatch, getState) => {
+  dispatch(showLoading());
+  const authUser = getState().authUser;
+  const thread = getState().threadDetail;
+  try {
+    if (!authUser || !authUser.id) {
+      throw new Error('Anda perlu login!');
+    }
+    const comment = await api.createComment(thread.id, content);
+    dispatch(addCommentCreator(comment));
+    dispatch(hideLoading());
+    return true;
+  } catch (error) {
+    alert(error.message);
+    dispatch(hideLoading());
+    return false;
+  }
+};
 export {
   getThreadDetail,
   clearThreadDetail,
@@ -144,4 +163,5 @@ export {
   setCommentUpVote,
   setCommentDownVote,
   setCommentNeutralVote,
+  addComment,
 };

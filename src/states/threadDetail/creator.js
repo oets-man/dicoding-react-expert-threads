@@ -70,3 +70,10 @@ export function neutralVoteCommentCreator(commentId, userId) {
     payload: { userId, commentId },
   };
 }
+
+export function addCommentCreator(comment) {
+  return {
+    type: ActionType.ADD_COMMENT,
+    payload: { comment },
+  };
+}

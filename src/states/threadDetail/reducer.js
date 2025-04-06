@@ -96,6 +96,22 @@ function threadDetailReducer(threadDetail = null, action = {}) {
           downVotesBy: action.payload.downVotesBy,
         })),
       };
+    // case ActionType.ADD_COMMENT:
+    //   return {
+    //     ...threadDetail,
+    //     comments: [...threadDetail.comments, action.payload.comment],
+    //   };
+    case ActionType.ADD_COMMENT:
+      return {
+        ...threadDetail,
+        comments: [
+          ...threadDetail.comments,
+          {
+            ...action.payload.comment,
+            ownerId: action.payload.comment.owner.id,
+          },
+        ],
+      };
     default:
       return threadDetail;
   }

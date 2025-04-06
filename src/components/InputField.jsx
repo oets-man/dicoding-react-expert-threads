@@ -10,6 +10,7 @@ const InputField = ({
   required = false,
   className = '',
   placeholder = '',
+  disabled = false,
   additionalProps = {},
 }) => {
   const defaultClassName =
@@ -31,8 +32,9 @@ const InputField = ({
           onChange={onChange}
           required={required}
           placeholder={placeholder}
-          className={`${defaultClassName} ${className}`}
+          className={`${defaultClassName} ${className} ${disabled ? 'bg-slate-200' : ''}`}
           {...additionalProps}
+          disabled={disabled}
         />
       </div>
     </div>
@@ -56,6 +58,7 @@ InputField.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string,
   additionalProps: PropTypes.object,
+  disabled: PropTypes.bool,
 };
 
 export default InputField;

@@ -108,7 +108,7 @@ const api = (() => {
     return detailThread;
   }
 
-  async function createComment({ threadId, content }) {
+  async function createComment(threadId, content) {
     const { comment } = await _fetchAuth(`threads/${threadId}/comments`, {
       method: 'POST',
       body: JSON.stringify({

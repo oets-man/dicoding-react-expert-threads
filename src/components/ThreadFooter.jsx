@@ -11,7 +11,7 @@ const ThreadFooter = ({
   downVotesBy,
   ownerId,
   createdAt,
-  totalComments,
+  totalComments = 0,
   showCommentButton = true,
 }) => {
   const authUser = useSelector((states) => states.authUser || null);
@@ -21,7 +21,7 @@ const ThreadFooter = ({
 
   return (
     <div className="flex items-center justify-between">
-      <div>
+      <div className="text-sm">
         <p>Posted: {postedAt(createdAt)}</p>
         <div className="flex items-center gap-1">
           By: {avatar && <img src={avatar} alt="avatar" className="w-6 h-6 rounded-full" />}
@@ -67,7 +67,7 @@ ThreadFooter.propTypes = {
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   ownerId: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  totalComments: PropTypes.number.isRequired,
+  totalComments: PropTypes.number,
   showCommentButton: PropTypes.bool,
 };
 export default ThreadFooter;

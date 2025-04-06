@@ -13,10 +13,13 @@ import LoadingTailwind from '../components/LoadingTailwind';
 import parse from 'html-react-parser';
 import ThreadFooter from '../components/ThreadFooter';
 import CommentItem from '../components/CommentItem';
+import NotFound from '../components/NotFound';
+import CommentForm from '../components/CommentForm';
+// import { useLoading } from '../hooks/use-loading';
 
 const ThreadDetailPage = () => {
-  const loadingBar = useSelector((states) => states.loadingBar);
-  const isLoading = loadingBar?.default ?? true;
+  // const isLoading = useLoading();
+
   const { id } = useParams();
 
   const threadDetail = useSelector((states) => states.threadDetail);
@@ -33,9 +36,9 @@ const ThreadDetailPage = () => {
   const onDownVote = () => dispatch(setDetailDownVote(id));
   const onNeutralVote = () => dispatch(setDetailNeutralVote(id));
 
-  if (isLoading) {
-    return <LoadingTailwind />;
-  }
+  // if (isLoading) {
+  //   return <LoadingTailwind />;
+  // }
 
   return threadDetail ? (
     <>
@@ -50,21 +53,21 @@ const ThreadDetailPage = () => {
         <hr className="my-2" />
         <ThreadFooter {...threadDetail} onUpVote={onUpVote} onDownVote={onDownVote} onNeutralVote={onNeutralVote} />
         <hr className="my-2" />
-      </div>
-      <div className="container mx-auto">
+
+        {/* COMMENT FORM */}
+        <CommentForm />
+
+        {/* COMMENTS */}
         <h3 className="text-xl">Comments</h3>
         {threadDetail.comments?.length > 0 ? (
           threadDetail.comments.map((comment) => <CommentItem key={comment.id} {...comment} />)
         ) : (
-          <p className="text-lg text-center">No comments available</p>
+          <NotFound>No comments available</NotFound>
         )}
       </div>
-
-      {/* <pre>{JSON.stringify(threadDetail, null, 2)}</pre> */}
-      {/* <pre>{JSON.stringify(threadDetail.comments, null, 2)}</pre> */}
     </>
   ) : (
-    <p className="text-lg text-center">No threads available</p>
+    <NotFound>No thread available</NotFound>
   );
 };
 
