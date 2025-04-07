@@ -1,11 +1,11 @@
 import LoadingBarContainer from 'react-redux-loading-bar';
 import { LoadingBar } from 'react-redux-loading-bar';
 
-const Loading = () => {
+const LoadingRedux = () => {
   return (
     <LoadingBarContainer>
       <LoadingBar />
     </LoadingBarContainer>
   );
 };
-export default Loading;
+export default LoadingRedux;

@@ -89,9 +89,9 @@ const ThreadNewPage = () => {
               <Button.Danger iconName="carbon:reset" type="reset" onClick={() => setThread(initInput)}>
                 Reset
               </Button.Danger>
-              <Button.Normal iconName="material-symbols-light:save-outline" type="submit" disabled={isLoading}>
+              <Button.Dark iconName="material-symbols-light:save-outline" type="submit" disabled={isLoading}>
                 {isLoading ? 'Menyimpan...' : 'Simpan'}
-              </Button.Normal>
+              </Button.Dark>
             </div>
           </form>
         </div>

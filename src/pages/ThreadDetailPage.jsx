@@ -9,17 +9,13 @@ import {
   setDetailUpVote,
 } from '../states/threadDetail/action';
 import { useParams } from 'react-router-dom';
-import LoadingTailwind from '../components/LoadingTailwind';
 import parse from 'html-react-parser';
 import ThreadFooter from '../components/ThreadFooter';
 import CommentItem from '../components/CommentItem';
 import NotFound from '../components/NotFound';
 import CommentForm from '../components/CommentForm';
-// import { useLoading } from '../hooks/use-loading';
 
 const ThreadDetailPage = () => {
-  // const isLoading = useLoading();
-
   const { id } = useParams();
 
   const threadDetail = useSelector((states) => states.threadDetail);
@@ -35,10 +31,6 @@ const ThreadDetailPage = () => {
   const onUpVote = () => dispatch(setDetailUpVote(id));
   const onDownVote = () => dispatch(setDetailDownVote(id));
   const onNeutralVote = () => dispatch(setDetailNeutralVote(id));
-
-  // if (isLoading) {
-  //   return <LoadingTailwind />;
-  // }
 
   return threadDetail ? (
     <>
@@ -58,7 +50,7 @@ const ThreadDetailPage = () => {
         <CommentForm />
 
         {/* COMMENTS */}
-        <h3 className="text-xl">Comments</h3>
+        <h3 className="text-xl mt-2">Comments</h3>
         {threadDetail.comments?.length > 0 ? (
           threadDetail.comments.map((comment) => <CommentItem key={comment.id} {...comment} />)
         ) : (

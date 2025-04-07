@@ -11,7 +11,7 @@ function getLeaderboards() {
       const leaderboards = await api.getLeaderboards();
       dispatch({
         type: ActionType.GET_LEADERBOARDS,
-        payload: { leaderboards },
+        payload: leaderboards,
       });
     } catch (error) {
       alert(error.message);

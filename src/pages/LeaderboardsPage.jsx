@@ -3,14 +3,22 @@ import { useDispatch } from 'react-redux';
 import { getLeaderboards } from '../states/leaderboards/action';
 import { useSelector } from 'react-redux';
 import Users from '../components/Users';
+import { useLoading } from '../hooks/use-loading';
+import LoadingTailwind from '../components/LoadingTailwind';
 
 const LeaderboardsPage = () => {
   const users = useSelector((states) => states.leaderboards);
 
   const dispatch = useDispatch();
+  const isLoading = useLoading();
+
   useEffect(() => {
     dispatch(getLeaderboards());
   }, [dispatch]);
+
+  if (isLoading) {
+    return <LoadingTailwind />;
+  }
 
   return (
     <>

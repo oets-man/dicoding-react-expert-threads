@@ -8,10 +8,10 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { preloadProcess } from './states/isPreload/action';
-import Loading from './components/Loading';
 import ErrorPage from './pages/ErrorPage';
 import ThreadDetailPage from './pages/ThreadDetailPage';
 import { getUsers } from './states/users/action';
+import LoadingRedux from './components/LoadingRedux';
 import LoadingTailwind from './components/LoadingTailwind';
 import ThreadNewPage from './pages/ThreadNewPage';
 import LeaderboardsPage from './pages/LeaderboardsPage';
@@ -31,6 +31,7 @@ const App = () => {
 
   return (
     <>
+      <LoadingRedux />
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />

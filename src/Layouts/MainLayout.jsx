@@ -1,5 +1,4 @@
 import { Link, Outlet } from 'react-router-dom';
-import Loading from '../components/Loading';
 import { unsetAuthUser } from '../states/authUser/action';
 import { useDispatch, useSelector } from 'react-redux';
 import Navigation from '../components/Navigation';
@@ -16,8 +15,6 @@ export default function MainLayout() {
 
   return (
     <>
-      <Loading />
-
       <header className="bg-slate-300 text-slate-800 dark:bg-slate-800 dark:text-slate-200">
         <div className="flex items-center justify-between">
           <Link to={'/'} className="px-4 py-2 ">

@@ -16,7 +16,7 @@ const LoadingTailwind = ({ children = '' }) => {
 };
 
 LoadingTailwind.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default LoadingTailwind;

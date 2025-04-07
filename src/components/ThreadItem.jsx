@@ -23,7 +23,7 @@ function ThreadItem({ id }) {
           <Link to={`/threads/${id}`}>{thread.title}</Link>
         </h2>
         <div>{parse(thread.body)}</div>
-        <hr className="mt-4 border-blue-500" />
+        <hr className="mt-4 mb-2 border-blue-500" />
         <ThreadFooter {...thread} onUpVote={onUpVote} onDownVote={onDownVote} onNeutralVote={onNeutralVote} />
       </div>
     )
